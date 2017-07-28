@@ -197,6 +197,8 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     daemons (1.2.4)
     declarative (0.0.9)
     declarative-option (0.1.0)
@@ -253,6 +255,11 @@ GEM
       nokogiri (>= 1.4.3)
     erubi (1.6.1)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
     faraday-encoding (0.0.4)
@@ -292,6 +299,7 @@ GEM
       tilt
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
+    hashdiff (0.3.4)
     hiredis (0.6.1)
     htmlentities (4.3.4)
     httmultiparty (0.3.16)
@@ -502,6 +510,10 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 5.1.2)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.2)
+      actionpack (~> 5.x, >= 5.0.1)
+      actionview (~> 5.x, >= 5.0.1)
+      activesupport (~> 5.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -615,6 +627,7 @@ GEM
     ruby-progressbar (1.8.1)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
+    safe_yaml (1.0.4)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -700,6 +713,7 @@ GEM
     uber (0.1.0)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    vcr (3.0.3)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -707,6 +721,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webmock (3.0.1)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -723,14 +741,17 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   devise-guests (~> 0.6)
+  factory_girl_rails (~> 4.8.0)
   fcrepo_wrapper
   hydra-role-management
   hyrax!
   jbuilder (~> 2.5)
   jquery-rails
+  json-schema (~> 2.8.0)
   listen (>= 3.0.5, < 3.2)
   puma (~> 3.7)
   rails (~> 5.1.2)
+  rails-controller-testing (~> 1.0.2)
   rsolr (>= 1.0)
   rspec-rails
   sass-rails (~> 5.0)
@@ -740,7 +761,9 @@ DEPENDENCIES
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
+  vcr (~> 3.0.3)
   web-console (>= 3.3.0)
+  webmock (~> 3.0.1)
 
 BUNDLED WITH
    1.15.3
