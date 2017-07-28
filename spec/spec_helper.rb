@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'active_fedora/noid/rspec'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
