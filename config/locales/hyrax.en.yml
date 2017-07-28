@@ -43,11 +43,11 @@ en:
           subject_tesim: Subject
           title_tesim: Title
   hyrax:
-    product_name:           "Hyrax"
+    product_name:           "Willow"
     product_twitter_handle: "@SamveraRepo"
-    institution_name:       "Institution"
-    institution_name_full:  "The Institution Name"
-    account_name:           "My Institution Account Id"
+    institution_name:       "Cottage Labs"
+    institution_name_full:  "Cottage Labs LLP"
+    account_name:           "My Cottage Labs Account Id"
     directory:
       suffix:               "@example.org"
     footer:
