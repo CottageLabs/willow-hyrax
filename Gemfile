@@ -58,7 +58,6 @@ group :development, :test do
   gem 'webmock', '~> 3.0.1'
   gem 'vcr', '~> 3.0.3'
   gem 'factory_girl_rails', '~> 4.8.0'
-  gem 'byebug'
   gem 'json-schema', '~> 2.8.0'
   gem 'rails-controller-testing', '~> 1.0.2'
 end
@@ -67,8 +66,4 @@ gem 'rsolr', '>= 1.0'
 gem 'jquery-rails'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
-group :development, :test do
-  gem 'fcrepo_wrapper'
-  gem 'rspec-rails'
-end
 gem 'hydra-role-management'
