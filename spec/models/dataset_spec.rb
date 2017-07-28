@@ -81,6 +81,17 @@ RSpec.describe Dataset, :vcr do
       }
       expect(@obj.other_title.size).to eq(0)
     end
+
+    it 'indexes the other titles' do
+      @obj = build(:dataset, other_title_attributes: [{
+          title: 'Another title',
+          title_type: 'Title type'
+        }]
+      )
+      @doc = @obj.to_solr
+      expect(@doc).to include('other_title_tesim')
+      expect(@doc['other_title_tesim']).to eq ['Another title']
+    end
   end
 
   describe 'nested attributes for date' do
@@ -128,6 +139,20 @@ RSpec.describe Dataset, :vcr do
       }
       expect(@obj.date.size).to eq(0)
     end
+
+    it 'indexes the date' do
+      @obj = build(:dataset, date_attributes: [{
+          date: '2017-01-01',
+          description: 'http://purl.org/dc/terms/dateAccepted',
+        }, {
+          date: '2018-01-01'
+        }]
+      )
+      @doc = @obj.to_solr
+      expect(@doc).to include('date_ssm')
+      expect(@doc['date_tesim']).to match_array(['2017-01-01', '2018-01-01'])
+      expect(@doc['date_accepted_ssi']).to match_array(['2017-01-01'])
+    end
   end
 
   describe 'nested attributes for rights' do
@@ -161,6 +186,18 @@ RSpec.describe Dataset, :vcr do
           }]
       }
       expect(@obj.rights_nested.size).to eq(0)
+    end
+
+    it 'indexes the rights' do
+      @obj = build(:dataset, rights_nested_attributes: [{
+            label: 'A rights label',
+            definition: 'A definition of the rights',
+            webpage: 'http://example.com/rights'
+          }]
+      )
+      @doc = @obj.to_solr
+      expect(@doc['rights_nested_sim']).to eq ['http://example.com/rights']
+      expect(@doc).to include('rights_nested_tesim')
     end
   end
 
@@ -285,6 +322,20 @@ RSpec.describe Dataset, :vcr do
       }
       expect(@obj.creator_nested.size).to eq(0)
     end
+
+    it 'indexes the creator' do
+      @obj = build(:dataset, creator_nested_attributes: [{
+            first_name: ['Foo'],
+            last_name: 'Bar',
+            orcid: '0000-0000-0000-0000',
+            role: 'Author'
+          }]
+      )
+      @doc = @obj.to_solr
+      expect(@doc['creator_nested_sim']).to eq ['Foo Bar']
+      expect(@doc['creator_nested_tesim']).to eq ['Foo Bar']
+      expect(@doc).to include('creator_nested_ssm')
+    end
   end
 
   describe 'nested attributes for subject' do
@@ -340,6 +391,23 @@ RSpec.describe Dataset, :vcr do
         }]
       }
       expect(@obj.subject_nested.size).to eq(0)
+    end
+
+    it 'indexes the subject' do
+      @obj = build(:dataset, subject_nested_attributes: [{
+          label: 'Subject label',
+          definition: 'Subject label definition',
+          classification: 'LCSH',
+          homepage: 'http://example.com/homepage'
+        }, {
+          label: 'Subject label 2',
+        }]
+      )
+      @doc = @obj.to_solr
+      expect(@doc).to include('subject_nested_tesim')
+      expect(@doc).to include('subject_nested_sim')
+      expect(@doc['subject_nested_tesim']).to match_array(['Subject label', 'Subject label 2'])
+      expect(@doc['subject_nested_sim']).to match_array(['Subject label', 'Subject label 2'])
     end
   end
 
@@ -472,6 +540,20 @@ RSpec.describe Dataset, :vcr do
           }]
       }
       expect(@obj.relation.size).to eq(0)
+    end
+
+    it 'indexes relation' do
+      @obj = build(:dataset, relation_attributes: [{
+          label: 'test label',
+          url: 'http://example.com/relation',
+          identifier: '123456',
+          relationship_name: 'Is part of'
+        }]
+      )
+      @doc = @obj.to_solr
+      expect(@doc).to include('relation_ssm')
+      expect(@doc['relation_url_sim']).to eq ['http://example.com/relation']
+      expect(@doc['relation_id_sim']).to eq ['123456']
     end
   end
 
