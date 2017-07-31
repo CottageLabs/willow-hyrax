@@ -50,7 +50,7 @@ class CatalogController < ApplicationController
     config.add_facet_field solr_name("subject", :facetable), label: I18n.t('willow.fields.subject'), limit: 5
     config.add_facet_field solr_name("subject_nested", :facetable), label: I18n.t('willow.fields.subject_nested'), limit: 5
     config.add_facet_field solr_name("language", :facetable), label: I18n.t('willow.fields.language'), limit: 5
-    config.add_facet_field solr_name("based_near_label", :facetable), label: I18n.t('willow.fields.based_near'), limit: 5
+    config.add_facet_field solr_name("based_near_label", :facetable), label: I18n.t('willow.fields.based_near_label'), limit: 5
     config.add_facet_field solr_name("publisher", :facetable), label: I18n.t('willow.fields.publisher'), limit: 5
     config.add_facet_field solr_name("funder", :facetable), label: I18n.t('willow.fields.funder'), limit: 5
     config.add_facet_field solr_name("tagged_version", :facetable), label: I18n.t('willow.fields.tagged_version'), limit: 5
@@ -108,7 +108,7 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field solr_name("title", :stored_searchable), label: I18n.t('willow.fields.title')
-    config.add_show_field solr_name("description", :stored_searchable), label: I18n.t('willow.fields.desscription')
+    config.add_show_field solr_name("description", :stored_searchable), label: I18n.t('willow.fields.description')
     config.add_show_field solr_name("keyword", :stored_searchable), label: I18n.t('willow.fields.keyword')
     config.add_show_field solr_name("subject", :stored_searchable), label: I18n.t('willow.fields.subject')
     config.add_show_field solr_name("subject_nested", :displayable), label: I18n.t('willow.fields.subject_nested')
@@ -116,7 +116,7 @@ class CatalogController < ApplicationController
     config.add_show_field solr_name("creator_nested", :displayable), label: I18n.t('willow.fields.creator_nested')
     config.add_show_field solr_name("contributor", :stored_searchable), label: I18n.t('willow.fields.contributor')
     config.add_show_field solr_name("publisher", :stored_searchable), label: I18n.t('willow.fields.publisher')
-    config.add_show_field solr_name("based_near_label", :stored_searchable), label: I18n.t('willow.fields.based_near')
+    config.add_show_field solr_name("based_near_label", :stored_searchable), label: I18n.t('willow.fields.based_near_label')
     config.add_show_field solr_name("language", :stored_searchable), label: I18n.t('willow.fields.language')
     config.add_show_field solr_name("date_uploaded", :stored_searchable), label: I18n.t('willow.fields.date_uploaded')
     config.add_show_field solr_name("date_modified", :stored_searchable), label: I18n.t('willow.fields.date_modified')
