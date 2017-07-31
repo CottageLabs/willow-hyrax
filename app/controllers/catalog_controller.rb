@@ -41,21 +41,21 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    config.add_facet_field solr_name("human_readable_type", :facetable), label: "Type", limit: 5
-    config.add_facet_field solr_name("resource_type", :facetable), label: "Resource Type", limit: 5
-    config.add_facet_field solr_name("creator", :facetable), limit: 5
-    config.add_facet_field solr_name("creator_nested", :facetable), label: "Creator", limit: 5
-    config.add_facet_field solr_name("contributor", :facetable), label: "Contributor", limit: 5
-    config.add_facet_field solr_name("keyword", :facetable), limit: 5
-    config.add_facet_field solr_name("subject", :facetable), limit: 5
-    config.add_facet_field solr_name("subject_nested", :facetable), label: "Subject", limit: 5
-    config.add_facet_field solr_name("language", :facetable), limit: 5
-    config.add_facet_field solr_name("based_near_label", :facetable), limit: 5
-    config.add_facet_field solr_name("publisher", :facetable), limit: 5
-    config.add_facet_field solr_name("funder", :facetable), label: "Publisher", limit: 5
-    config.add_facet_field solr_name("tagged_version", :facetable), label: "Publisher", limit: 5
-    config.add_facet_field solr_name("file_format", :facetable), limit: 5
-    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: 'Collections'
+    config.add_facet_field solr_name("human_readable_type", :facetable), label: I18n.t('willow.fields.human_readable_type'), limit: 5
+    config.add_facet_field solr_name("resource_type", :facetable), label: I18n.t('willow.fields.resource_type'), limit: 5
+    config.add_facet_field solr_name("creator", :facetable), label: I18n.t('willow.fields.creator'), limit: 5
+    config.add_facet_field solr_name("creator_nested", :facetable), label: I18n.t('willow.fields.creator_nested'), limit: 5
+    config.add_facet_field solr_name("contributor", :facetable), label: I18n.t('willow.fields.contributor'), limit: 5
+    config.add_facet_field solr_name("keyword", :facetable), label: I18n.t('willow.fields.keyword'), limit: 5
+    config.add_facet_field solr_name("subject", :facetable), label: I18n.t('willow.fields.subject'), limit: 5
+    config.add_facet_field solr_name("subject_nested", :facetable), label: I18n.t('willow.fields.subject_nested'), limit: 5
+    config.add_facet_field solr_name("language", :facetable), label: I18n.t('willow.fields.language'), limit: 5
+    config.add_facet_field solr_name("based_near_label", :facetable), label: I18n.t('willow.fields.based_near'), limit: 5
+    config.add_facet_field solr_name("publisher", :facetable), label: I18n.t('willow.fields.publisher'), limit: 5
+    config.add_facet_field solr_name("funder", :facetable), label: I18n.t('willow.fields.funder'), limit: 5
+    config.add_facet_field solr_name("tagged_version", :facetable), label: I18n.t('willow.fields.tagged_version'), limit: 5
+    config.add_facet_field solr_name("file_format", :facetable), label: I18n.t('willow.fields.file_format'), limit: 5
+    config.add_facet_field solr_name('member_of_collections', :symbol), limit: 5, label: I18n.t('willow.fields.member_of_collections')
 
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
@@ -68,75 +68,75 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field solr_name("title", :stored_searchable), label: "Title", itemprop: 'name', if: false
-    config.add_index_field solr_name("description", :stored_searchable), itemprop: 'description', helper_method: :iconify_auto_link
-    config.add_index_field solr_name("keyword", :stored_searchable), itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
-    config.add_index_field solr_name("subject", :stored_searchable), itemprop: 'about', link_to_search: solr_name("subject", :facetable)
-    config.add_index_field solr_name("subject_nested", :stored_searchable), label: "Subject", itemprop: 'about', link_to_search: solr_name("subject_nested", :facetable)
-    config.add_index_field solr_name("creator", :stored_searchable), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
-    config.add_index_field solr_name("creator_nested", :stored_searchable), label: "Creator", itemprop: 'creator', link_to_search: solr_name("creator_nested", :facetable)
-    config.add_index_field solr_name("contributor", :stored_searchable), itemprop: 'contributor', link_to_search: solr_name("contributor", :facetable)
-    config.add_index_field solr_name("proxy_depositor", :symbol), label: "Depositor", helper_method: :link_to_profile
-    config.add_index_field solr_name("depositor"), label: "Owner", helper_method: :link_to_profile
-    config.add_index_field solr_name("publisher", :stored_searchable), itemprop: 'publisher', link_to_search: solr_name("publisher", :facetable)
-    config.add_index_field solr_name("based_near_label", :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name("based_near_label", :facetable)
-    config.add_index_field solr_name("language", :stored_searchable), itemprop: 'inLanguage', link_to_search: solr_name("language", :facetable)
-    config.add_index_field solr_name("date_uploaded", :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
-    config.add_index_field solr_name("date_modified", :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
-    config.add_index_field solr_name("date_created", :stored_searchable), itemprop: 'dateCreated'
+    config.add_index_field solr_name("title", :stored_searchable), label: I18n.t('willow.fields.title'), itemprop: 'name', if: false
+    config.add_index_field solr_name("description", :stored_searchable), label: I18n.t('willow.fields.description'), itemprop: 'description', helper_method: :iconify_auto_link
+    config.add_index_field solr_name("keyword", :stored_searchable), label: I18n.t('willow.fields.keyword'), itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
+    config.add_index_field solr_name("subject", :stored_searchable), label: I18n.t('willow.fields.subject'), itemprop: 'about', link_to_search: solr_name("subject", :facetable)
+    config.add_index_field solr_name("subject_nested", :stored_searchable), label: I18n.t('willow.fields.subject_nested'), itemprop: 'about', link_to_search: solr_name("subject_nested", :facetable)
+    config.add_index_field solr_name("creator", :stored_searchable), label: I18n.t('willow.fields.creator'), itemprop: 'creator', link_to_search: solr_name("creator", :facetable)
+    config.add_index_field solr_name("creator_nested", :stored_searchable), label: I18n.t('willow.fields.creator_nested'), itemprop: 'creator', link_to_search: solr_name("creator_nested", :facetable)
+    config.add_index_field solr_name("contributor", :stored_searchable), label: I18n.t('willow.fields.contributor'), itemprop: 'contributor', link_to_search: solr_name("contributor", :facetable)
+    config.add_index_field solr_name("proxy_depositor", :symbol), label: I18n.t('willow.fields.proxy_depositor'), helper_method: :link_to_profile
+    config.add_index_field solr_name("depositor"), label: I18n.t('willow.fields.depositor'), helper_method: :link_to_profile
+    config.add_index_field solr_name("publisher", :stored_searchable), label: I18n.t('willow.fields.publisher'), itemprop: 'publisher', link_to_search: solr_name("publisher", :facetable)
+    config.add_index_field solr_name("based_near_label", :stored_searchable), label: I18n.t('willow.fields.based_near'), itemprop: 'contentLocation', link_to_search: solr_name("based_near_label", :facetable)
+    config.add_index_field solr_name("language", :stored_searchable), label: I18n.t('willow.fields.language'), itemprop: 'inLanguage', link_to_search: solr_name("language", :facetable)
+    config.add_index_field solr_name("date_uploaded", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_uploaded'), itemprop: 'datePublished', helper_method: :human_readable_date
+    config.add_index_field solr_name("date_modified", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_modified'), itemprop: 'dateModified', helper_method: :human_readable_date
+    config.add_index_field solr_name("date_created", :stored_searchable), label: I18n.t('willow.fields.date_created'), itemprop: 'dateCreated'
     # dataset date fields for search
-    config.add_index_field solr_name("date_accepted", :stored_sortable, type: :date), label: "Date accepted", itemprop: 'dateAccepted'
-    config.add_index_field solr_name("date_available", :stored_sortable, type: :date), label: "Date available", itemprop: 'dateAvailable'
-    config.add_index_field solr_name("date_copyrighted", :stored_sortable, type: :date), label: "Date copyrighted", itemprop: 'dateCopyrighted'
-    config.add_index_field solr_name("date_collected", :stored_sortable, type: :date), label: "Date collected", itemprop: 'dateCollected'
-    config.add_index_field solr_name("date_issued", :stored_sortable, type: :date), label: "Date issued", itemprop: 'dateIssued'
-    config.add_index_field solr_name("date_published", :stored_sortable, type: :date), label: "Date published", itemprop: 'datePublished'
-    config.add_index_field solr_name("date_submitted", :stored_sortable, type: :date), label: "Date submitted", itemprop: 'dateSubmitted'
-    config.add_index_field solr_name("date_updated", :stored_sortable, type: :date), label: "Date updated", itemprop: 'dateUpdated'
-    config.add_index_field solr_name("rights", :stored_searchable), helper_method: :license_links
-    config.add_index_field solr_name("rights_nested", :stored_searchable), label: "Rights", helper_method: :license_links
-    config.add_index_field solr_name("resource_type", :stored_searchable), label: "Resource Type", link_to_search: solr_name("resource_type", :facetable)
-    config.add_index_field solr_name("file_format", :stored_searchable), link_to_search: solr_name("file_format", :facetable)
-    config.add_index_field solr_name("identifier", :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
-    config.add_index_field solr_name("embargo_release_date", :stored_sortable, type: :date), label: "Embargo release date", helper_method: :human_readable_date
-    config.add_index_field solr_name("lease_expiration_date", :stored_sortable, type: :date), label: "Lease expiration date", helper_method: :human_readable_date
+    config.add_index_field solr_name("date_accepted", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_accepted'), itemprop: 'dateAccepted'
+    config.add_index_field solr_name("date_available", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_available'), itemprop: 'dateAvailable'
+    config.add_index_field solr_name("date_copyrighted", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_copyrighted'), itemprop: 'dateCopyrighted'
+    config.add_index_field solr_name("date_collected", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_collected'), itemprop: 'dateCollected'
+    config.add_index_field solr_name("date_issued", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_issued'), itemprop: 'dateIssued'
+    config.add_index_field solr_name("date_published", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_published'), itemprop: 'datePublished'
+    config.add_index_field solr_name("date_submitted", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_submitted'), itemprop: 'dateSubmitted'
+    config.add_index_field solr_name("date_updated", :stored_sortable, type: :date), label: I18n.t('willow.fields.date_updated'), itemprop: 'dateUpdated'
+    config.add_index_field solr_name("rights", :stored_searchable), label: I18n.t('willow.fields.rights'), helper_method: :license_links
+    config.add_index_field solr_name("rights_nested", :stored_searchable), label: I18n.t('willow.fields.rights_nested'), helper_method: :license_links
+    config.add_index_field solr_name("resource_type", :stored_searchable), label: I18n.t('willow.fields.resource_type'), link_to_search: solr_name("resource_type", :facetable)
+    config.add_index_field solr_name("file_format", :stored_searchable), label: I18n.t('willow.fields.file_format'), link_to_search: solr_name("file_format", :facetable)
+    config.add_index_field solr_name("identifier", :stored_searchable), label: I18n.t('willow.fields.identifier'), helper_method: :index_field_link, field_name: 'identifier'
+    config.add_index_field solr_name("embargo_release_date", :stored_sortable, type: :date), label: I18n.t('willow.fields.embargo_release_date'), helper_method: :human_readable_date
+    config.add_index_field solr_name("lease_expiration_date", :stored_sortable, type: :date), label: I18n.t('willow.fields.lease_expiration_date'), helper_method: :human_readable_date
     # dataset fields for search
-    config.add_index_field solr_name("doi", :stored_searchable), label: "DOI"
-    config.add_index_field solr_name("other_title", :stored_searchable), label: "Alternate titles"
-    config.add_index_field solr_name("funder", :stored_searchable), label: "Funder"
+    config.add_index_field solr_name("doi", :stored_searchable), label: I18n.t('willow.fields.doi')
+    config.add_index_field solr_name("other_title", :stored_searchable), label: I18n.t('willow.fields.other_title')
+    config.add_index_field solr_name("funder", :stored_searchable), label: I18n.t('willow.fields.funder')
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field solr_name("title", :stored_searchable)
-    config.add_show_field solr_name("description", :stored_searchable)
-    config.add_show_field solr_name("keyword", :stored_searchable)
-    config.add_show_field solr_name("subject", :stored_searchable)
-    config.add_show_field solr_name("subject_nested", :displayable), label: "Subject"
-    config.add_show_field solr_name("creator", :stored_searchable)
-    config.add_show_field solr_name("creator_nested", :displayable), label: "Creator"
-    config.add_show_field solr_name("contributor", :stored_searchable)
-    config.add_show_field solr_name("publisher", :stored_searchable)
-    config.add_show_field solr_name("based_near_label", :stored_searchable)
-    config.add_show_field solr_name("language", :stored_searchable)
-    config.add_show_field solr_name("date_uploaded", :stored_searchable)
-    config.add_show_field solr_name("date_modified", :stored_searchable)
-    config.add_show_field solr_name("date_created", :stored_searchable)
-    config.add_show_field solr_name("rights", :stored_searchable)
-    config.add_show_field solr_name("rights_nested", :displayable), label: "Rights"
-    config.add_show_field solr_name("resource_type", :stored_searchable), label: "Resource Type"
-    config.add_show_field solr_name("format", :stored_searchable)
-    config.add_show_field solr_name("identifier", :stored_searchable)
+    config.add_show_field solr_name("title", :stored_searchable), label: I18n.t('willow.fields.title')
+    config.add_show_field solr_name("description", :stored_searchable), label: I18n.t('willow.fields.desscription')
+    config.add_show_field solr_name("keyword", :stored_searchable), label: I18n.t('willow.fields.keyword')
+    config.add_show_field solr_name("subject", :stored_searchable), label: I18n.t('willow.fields.subject')
+    config.add_show_field solr_name("subject_nested", :displayable), label: I18n.t('willow.fields.subject_nested')
+    config.add_show_field solr_name("creator", :stored_searchable), label: I18n.t('willow.fields.creator')
+    config.add_show_field solr_name("creator_nested", :displayable), label: I18n.t('willow.fields.creator_nested')
+    config.add_show_field solr_name("contributor", :stored_searchable), label: I18n.t('willow.fields.contributor')
+    config.add_show_field solr_name("publisher", :stored_searchable), label: I18n.t('willow.fields.publisher')
+    config.add_show_field solr_name("based_near_label", :stored_searchable), label: I18n.t('willow.fields.based_near')
+    config.add_show_field solr_name("language", :stored_searchable), label: I18n.t('willow.fields.language')
+    config.add_show_field solr_name("date_uploaded", :stored_searchable), label: I18n.t('willow.fields.date_uploaded')
+    config.add_show_field solr_name("date_modified", :stored_searchable), label: I18n.t('willow.fields.date_modified')
+    config.add_show_field solr_name("date_created", :stored_searchable), label: I18n.t('willow.fields.date_created')
+    config.add_show_field solr_name("rights", :stored_searchable), label: I18n.t('willow.fields.rights')
+    config.add_show_field solr_name("rights_nested", :displayable), label: I18n.t('willow.fields.rights_nested')
+    config.add_show_field solr_name("resource_type", :stored_searchable), label: I18n.t('willow.fields.resource_type')
+    config.add_show_field solr_name("format", :stored_searchable), label: I18n.t('willow.fields.format')
+    config.add_show_field solr_name("identifier", :stored_searchable), label: I18n.t('willow.fields.identifier')
     #Dataset show fields
-    config.add_show_field solr_name("doi", :stored_searchable), label: "DOI"
-    config.add_show_field solr_name("other_title", :displayable), label: "Alternate titles"
-    config.add_show_field solr_name("date", :displayable), label: "Dates"
-    config.add_show_field solr_name("relation", :displayable), label: "Related items"
-    config.add_show_field solr_name("admin_metadata", :displayable), label: "Admin information"
+    config.add_show_field solr_name("doi", :stored_searchable), label: I18n.t('willow.fields.doi')
+    config.add_show_field solr_name("other_title", :displayable), label: I18n.t('willow.fields.other_title')
+    config.add_show_field solr_name("date", :displayable), label: I18n.t('willow.fields.date')
+    config.add_show_field solr_name("relation", :displayable), label: I18n.t('willow.fields.relation')
+    config.add_show_field solr_name("admin_metadata", :displayable), label: I18n.t('willow.fields.admin_metadata')
     #Article show fields
-    config.add_show_field solr_name("coverage", :stored_searchable), label: "Coverage"
-    config.add_show_field solr_name("apc", :stored_searchable), label: "APC"
-    config.add_show_field solr_name("tagged_version", :stored_searchable), label: "Version"
-    config.add_show_field solr_name("project_nested", :stored_searchable), label: "Project"
+    config.add_show_field solr_name("coverage", :stored_searchable), label: I18n.t('willow.fields.coverage')
+    config.add_show_field solr_name("apc", :stored_searchable), label: I18n.t('willow.fields.apc')
+    config.add_show_field solr_name("tagged_version", :stored_searchable), label: I18n.t('willow.fields.tagged_version')
+    config.add_show_field solr_name("project_nested", :stored_searchable), label: I18n.t('willow.fields.project_nested')
 
 
     # "fielded" search configuration. Used by pulldown among other places.
