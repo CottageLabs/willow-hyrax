@@ -5,6 +5,8 @@ Hyrax.config do |config|
   config.register_curation_concern :book
   # Injected via `rails g hyrax:work Dataset`
   config.register_curation_concern :dataset
+  # Injected via `rails g hyrax:work Article`
+  config.register_curation_concern :article
   # Register roles that are expected by your implementation.
   # @see Hyrax::RoleRegistry for additional details.
   # @note there are magical roles as defined in Hyrax::RoleRegistry::MAGIC_ROLES
