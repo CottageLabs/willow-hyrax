@@ -25,4 +25,52 @@ class SolrDocument
   # Do content negotiation for AF models. 
 
   use_extension( Hydra::ContentNegotiation )
+
+  def doi
+    self[Solrizer.solr_name('doi', :stored_searchable)]
+  end
+
+  def other_title
+    self[Solrizer.solr_name('other_title', :displayable)]
+  end
+
+  def creator_nested
+    self[Solrizer.solr_name('creator_nested', :displayable)]
+  end
+
+  def date
+    self[Solrizer.solr_name('date', :displayable)]
+  end
+
+  def rights_nested
+    self[Solrizer.solr_name('rights_nested', :displayable)]
+  end
+
+  def relation
+    self[Solrizer.solr_name('relation', :displayable)]
+  end
+
+  def subject_nested
+    self[Solrizer.solr_name('subject_nested', :displayable)]
+  end
+
+  def admin_metadata
+    self[Solrizer.solr_name('admin_metadata', :displayable)]
+  end
+
+  def coverage
+    self[Solrizer.solr_name('coverage', :stored_searchable)]
+  end
+
+  def apc
+    self[Solrizer.solr_name('apc', :stored_searchable)]
+  end
+
+  def tagged_version
+    self[Solrizer.solr_name('tagged_version', :stored_searchable)]
+  end
+
+  def project
+    self[Solrizer.solr_name('project', :displayable)]
+  end
 end
