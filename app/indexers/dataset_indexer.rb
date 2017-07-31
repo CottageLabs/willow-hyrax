@@ -30,16 +30,16 @@ class DatasetIndexer < Hyrax::WorkIndexer
       solr_doc[Solrizer.solr_name('creator_nested', :stored_searchable)] = creators
       solr_doc[Solrizer.solr_name('creator_nested', :displayable)] = object.creator_nested.to_json
       # rights
-      solr_doc[Solrizer.solr_name('rights_nested', :stored_searchable)] = object.rights_nested.map { |r| r.webpage.first }
-      solr_doc[Solrizer.solr_name('rights_nested', :facetable)] = object.rights_nested.map { |r| r.webpage.first }
+      solr_doc[Solrizer.solr_name('rights_nested', :stored_searchable)] = object.rights_nested.map { |r| r.webpage.first }.reject { |r| r.blank? }
+      solr_doc[Solrizer.solr_name('rights_nested', :facetable)] = object.rights_nested.map { |r| r.webpage.first }.reject { |r| r.blank? }
       solr_doc[Solrizer.solr_name('rights_nested', :displayable)] = object.rights_nested.to_json
       # subject
-      solr_doc[Solrizer.solr_name('subject_nested', :stored_searchable)] = object.subject_nested.map { |s| s.label.first }
-      solr_doc[Solrizer.solr_name('subject_nested', :facetable)] = object.subject_nested.map { |s| s.label.first }
+      solr_doc[Solrizer.solr_name('subject_nested', :stored_searchable)] = object.subject_nested.map { |s| s.label.first }.reject { |s| s.blank? }
+      solr_doc[Solrizer.solr_name('subject_nested', :facetable)] = object.subject_nested.map { |s| s.label.first }.reject { |s| s.blank? }
       solr_doc[Solrizer.solr_name('subject_nested', :displayable)] = object.subject_nested.to_json
       # relation
-      solr_doc[Solrizer.solr_name('relation_url', :facetable)] = object.relation.map { |r| r.url.first }
-      solr_doc[Solrizer.solr_name('relation_id', :facetable)] = object.relation.map { |r| r.identifier.first }
+      solr_doc[Solrizer.solr_name('relation_url', :facetable)] = object.relation.map { |r| r.url.first }.reject { |r| r.blank? }
+      solr_doc[Solrizer.solr_name('relation_id', :facetable)] = object.relation.map { |r| r.identifier.first }.reject { |r| r.blank? }
       solr_doc[Solrizer.solr_name('relation', :displayable)] = object.relation.to_json
       # admin metadata
       solr_doc[Solrizer.solr_name('admin_metadata', :displayable)] = object.admin_metadata.to_json
