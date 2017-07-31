@@ -42,7 +42,7 @@ class NestedRightsAttributeRenderer < Hyrax::Renderers::AttributeRenderer
       nil
     end
     if label.blank? and !value.blank?
-      label = CurationConcerns::LicenseService.new.label(value)
+      label = Hyrax::LicenseService.new.label(value)
     end
     if label.nil?
       nil

@@ -1,4 +1,4 @@
-class RelationAttributeRenderer < Hyrax::Renderers::RightsAttributeRenderer
+class RelationAttributeRenderer < Hyrax::Renderers::AttributeRenderer
   private
   def attribute_value_to_html(value)
     value = JSON.parse(value)
