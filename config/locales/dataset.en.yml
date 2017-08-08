@@ -5,7 +5,7 @@ en:
     select_type:
       dataset:
         name:               "Dataset"
-        description:        "Dataset with Datacite metadata schema propertiesi"
+        description:        "Dataset with Datacite metadata schema properties"
   simple_form:
     labels:
       dataset:
