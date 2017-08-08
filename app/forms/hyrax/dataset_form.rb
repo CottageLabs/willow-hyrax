@@ -7,7 +7,7 @@ module Hyrax
       :rights_nested, :subject_nested, :relation, :admin_metadata]
     self.terms -= [:based_near, :creator, :contributor, :date_created,
       :identifier,  :license, :rights_statement, :related_url, :subject]
-    self.required_fields += [:creator_nested, :publisher, :date, :resource_type, :rights_statement]
+    self.required_fields += [:creator_nested, :publisher, :date, :resource_type, :rights_nested]
     self.required_fields -= [:creator, :keyword, :license, :rights_statement]
 
     NESTED_ASSOCIATIONS = [:other_title, :date, :creator_nested, :rights_nested,
