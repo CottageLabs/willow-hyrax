@@ -15,4 +15,3 @@ module CommonMethods
     end
   end
 end
-
