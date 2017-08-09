@@ -1,5 +1,6 @@
 # Generated via
 #  `rails generate hyrax:work Article`
+require "./lib/vocabularies/rioxxterms"
 class Article < ActiveFedora::Base
   include ::Hyrax::WorkBehavior
 
@@ -26,7 +27,8 @@ class Article < ActiveFedora::Base
     index.as :stored_searchable, :facetable
   end
   property :admin_metadata, predicate: ::RDF::Vocab::MODS.adminMetadata, class_name: "AdministrativeStatement"
-  property :creator_nested, predicate: ::RDF::Vocab::DC.license, class_name:"PersonStatement"  property :date, predicate: ::RDF::Vocab::DC.date, class_name:"DateStatement"
+  property :creator_nested, predicate: ::RDF::Vocab::SIOC.has_creator, class_name:"PersonStatement" 
+  property :date, predicate: ::RDF::Vocab::DC.date, class_name:"DateStatement"
   property :project, predicate: RioxxTerms.project, class_name:"ProjectStatement"
   property :relation, predicate: ::RDF::Vocab::DC.relation, class_name:"RelationStatement"
   property :rights_nested, predicate: ::RDF::Vocab::DC.license, class_name:"RightsStatement"
