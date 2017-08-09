@@ -48,7 +48,7 @@ describe Hyrax::BooksController, :type => :controller do
     let(:actor) { double(create: create_status) }
 
     before :each do
-      allow(Hyrax).to receive(:actor).and_return(actor)
+      allow(Hyrax::CurationConcern).to receive(:actor).and_return(actor)
       allow(controller).to receive(:hyrax).and_return(work)
 
       @message = notification_message_for('create_work.hyrax') do
