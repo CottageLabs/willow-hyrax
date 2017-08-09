@@ -44,6 +44,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'hyrax', github: 'samvera/hyrax'
+gem 'blacklight_advanced_search', '~> 6.0'
 
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
@@ -67,3 +68,5 @@ gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'hydra-role-management'
 gem 'bootstrap-datepicker-rails'
+gem 'aws-sdk', '~> 2.9.15'
+gem 'tinymce-rails-imageupload', '4.0.17.beta.2' # we need this specific version to fix an asset compilation problem
