@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :book, aliases: [:private_work], class: Book do
+  factory :book, aliases: [:private_book], class: Book do
 
     transient do
       user { FactoryGirl.create(:user) }
@@ -19,7 +19,7 @@ FactoryGirl.define do
       work.apply_depositor_metadata(evaluator.user.user_key)
     end
 
-    factory :work_with_one_file do
+    factory :book_with_one_file do
       before(:create) do |work, evaluator|
         work.ordered_members << FactoryGirl.create(:file_set, user: evaluator.user, title: ['A Contained FileSet'])
       end

@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/hyraxs/session_helpers'
+require 'support/hyrax/session_helpers'
 require 'support/notifications'
 require 'support/jisc_rdss_schemas'
 

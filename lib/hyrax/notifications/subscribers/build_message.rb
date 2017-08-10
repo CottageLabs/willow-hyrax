@@ -132,7 +132,7 @@ module Hyrax
         def objectRights
           case
             when [Image, Book].include?(@curation_concern_type)
-              @object.rights.to_a.map{|r|
+              @object.license.to_a.map{|r|
                 {
                     rightsStatement: [ UNKNOWN ],
                     rightsHolder: [ UNKNOWN ],

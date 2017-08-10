@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/hyraxs/session_helpers'
+require 'support/hyrax/session_helpers'
 require 'support/notifications'
 require 'support/jisc_rdss_schemas'
 
@@ -17,7 +17,7 @@ require 'support/jisc_rdss_schemas'
 describe Hyrax::BooksController, :type => :controller do
   let(:depositor_user) { create(:user, email: 'josiah@example.com', title: 'Professor of Psychoceramics',
                                 display_name: 'Josiah Carberry', orcid: '0000-0002-1825-0097' ) }
-  let(:work) { create(:work_with_one_file,
+  let(:work) { create(:book_with_one_file,
                       user: depositor_user,
                       title: ['Do Mug Fairies Exist? An experiment in self-cleaning crockery'],
                       resource_type: ["Article"],
@@ -27,7 +27,7 @@ describe Hyrax::BooksController, :type => :controller do
                                         'that this hypothesis is true, as the author has very infrequently had to resort ' +
                                         'to cleaning the mugs himself.'],
                       keyword: ["mug", "fairies", "psychoceramics"],
-                      rights: ["http://creativecommons.org/publicdomain/zero/1.0/"],
+                      license: ["http://creativecommons.org/publicdomain/zero/1.0/"],
                       publisher: ["Society of Psychoceramics"],
                       date_created: ['2014-04-01'],
                       subject: ["Psychoceramics"],
